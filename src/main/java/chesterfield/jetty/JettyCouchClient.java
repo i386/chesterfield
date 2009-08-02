@@ -3,10 +3,14 @@ package chesterfield.jetty;
 import chesterfield.*;
 import org.mortbay.jetty.client.HttpClient;
 import org.mortbay.jetty.client.HttpExchange;
+import org.mortbay.jetty.HttpFields;
 import org.mortbay.io.ByteArrayBuffer;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Implementation of {@link chesterfield.CouchClient} using the Jetty HTTP client
@@ -61,12 +65,28 @@ public class JettyCouchClient implements CouchClient
 
                 try
                 {
-                    return new CouchResult(contentExchange.getResponseStatus(), contentExchange.getResponseContent());
+                    final Map<String, String> headers = getHeaders(contentExchange.getResponseFields());
+                    return new CouchResult(contentExchange.getResponseStatus(), contentExchange.getResponseContent(), headers);
                 }
                 catch (UnsupportedEncodingException e)
                 {
                     throw new RuntimeException(e.getMessage(), e);
                 }
+            }
+
+            private Map<String, String> getHeaders(HttpFields httpFields)
+            {
+                final Map<String, String> headers = new HashMap<String, String>();
+                if (httpFields != null)
+                {
+                    final Iterator<HttpFields.Field> iterator = httpFields.getFields();
+                    while (iterator.hasNext())
+                    {
+                        final HttpFields.Field field = iterator.next();
+                        headers.put(field.getName(), field.getValue());
+                    }
+                }
+                return headers;
             }
         };
     }
