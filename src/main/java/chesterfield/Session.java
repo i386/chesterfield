@@ -125,11 +125,15 @@ public class Session
     public Database getDatabase(String databaseName, boolean createIfDoesNotExist)
     {
         final boolean exists = getDatabaseNames().contains(databaseName);
-        if (!exists)
+        if (!exists && createIfDoesNotExist)
         {
             return createDatabase(databaseName);
         }
-        return new Database(databaseName, this);
+        else if (exists)
+        {
+            return new Database(databaseName, this);
+        }
+        return null;
     }
 
     /**
@@ -159,6 +163,7 @@ public class Session
      */
     public boolean deleteDatabase(Database database)
     {
+        if (database == null) return false;
         return deleteDatabase(database.getName());
     }
 }

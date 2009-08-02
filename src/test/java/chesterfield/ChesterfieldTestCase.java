@@ -24,13 +24,19 @@ public abstract class ChesterfieldTestCase extends TestCase
     protected void setUp() throws Exception
     {
         session = new Session("localhost", 5984, false);
-        session.deleteDatabase(DATABASE_NAME);
+        deleteDatabases();
         database = session.createDatabase(DATABASE_NAME);
     }
 
     @Override
     protected void tearDown() throws Exception
     {
-        session.deleteDatabase(DATABASE_NAME);
+        deleteDatabases();
+    }
+
+    private void deleteDatabases()
+    {
+        session.deleteDatabase(getDatabase());
+        session.deleteDatabase(ANOTHER_DATABASE_NAME);
     }
 }
