@@ -1,5 +1,7 @@
 package chesterfield;
 
+import com.google.gson.JsonObject;
+
 import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
 
@@ -8,6 +10,8 @@ import java.io.UnsupportedEncodingException;
  */
 public class Database
 {
+    private static final String DOC_COUNT = "doc_count";
+
     private final String name;
     private final Session session;
 
@@ -49,5 +53,15 @@ public class Database
         {
             throw new RuntimeException(e.getMessage(), e);
         }
+    }
+
+    /**
+     * Get the total number of documents in the database
+     * @return count
+     */
+    public int getDocumentCount()
+    {
+        final CouchResult<JsonObject> result = session.getClient().createRequest(getDbUrl()).execute(HttpMethod.GET);
+        return result.getElement().get(DOC_COUNT).getAsInt();
     }
 }
