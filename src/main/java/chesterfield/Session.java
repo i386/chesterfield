@@ -1,6 +1,6 @@
 package chesterfield;
 
-import chesterfield.jetty.JettyCouchClient;
+import chesterfield.JettyCouchClient;
 
 import java.util.List;
 import java.util.ArrayList;

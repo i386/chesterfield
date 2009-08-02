@@ -1,4 +1,4 @@
-package chesterfield.jetty;
+package chesterfield;
 
 import chesterfield.*;
 import org.mortbay.jetty.client.HttpClient;
