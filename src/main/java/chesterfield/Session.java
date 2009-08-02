@@ -111,7 +111,7 @@ public class Session
     public Database createDatabase(String databaseName)
     {
         Database database = new Database(databaseName, this);
-        CouchResult result = client.createRequest(baseUrl + databaseName + "/").execute(HttpMethod.PUT);
+        CouchResult result = client.createRequest(database.getDbUrl()).execute(HttpMethod.PUT);
         if (!result.isOK()) return null;
         return database;
     }
@@ -153,7 +153,8 @@ public class Session
      */
     public boolean deleteDatabase(String databaseName)
     {
-        return client.createRequest(baseUrl + databaseName + "/").execute(HttpMethod.DELETE).isOK();
+        final Database database = new Database(databaseName, this);
+        return client.createRequest(database.getDbUrl()).execute(HttpMethod.DELETE).isOK();
     }
 
     /**

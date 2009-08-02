@@ -1,5 +1,8 @@
 package chesterfield;
 
+import java.net.URLEncoder;
+import java.io.UnsupportedEncodingException;
+
 /**
  * Represents a Couchdb database which can be used to update documents
  */
@@ -38,6 +41,13 @@ public class Database
      */
     String getDbUrl()
     {
-        return session.getBaseUrl() + name + "/";
+        try
+        {
+            return session.getBaseUrl() + URLEncoder.encode(name, "UTF-8") + "/";
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            throw new RuntimeException(e.getMessage(), e);
+        }
     }
 }
