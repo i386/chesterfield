@@ -1,7 +1,5 @@
 package chesterfield;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * Minimum requred fields for document serialization and deserialization
  *
