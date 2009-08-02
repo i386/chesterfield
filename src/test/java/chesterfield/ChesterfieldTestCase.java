@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 public abstract class ChesterfieldTestCase extends TestCase
 {
     protected static final String DATABASE_NAME = "chesterfield-test-db";
+    protected static final String ANOTHER_DATABASE_NAME = "chester-field-another-test-db";
     
     private Session session;
     private Database database;
