@@ -36,7 +36,7 @@ public abstract class ChesterfieldTestCase extends TestCase
 
     private void deleteDatabases()
     {
-        session.deleteDatabase(getDatabase());
+        session.deleteDatabase(DATABASE_NAME);
         session.deleteDatabase(ANOTHER_DATABASE_NAME);
     }
 }

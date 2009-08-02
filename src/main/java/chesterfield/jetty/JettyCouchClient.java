@@ -39,6 +39,7 @@ public class JettyCouchClient implements CouchClient
                 HttpExchange.ContentExchange contentExchange = new HttpExchange.ContentExchange();
                 contentExchange.setMethod(method.name());
                 contentExchange.setURL(url);
+                contentExchange.setRequestContentType("application/json");
                 
                 if (body != null)
                 {

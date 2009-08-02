@@ -1,5 +1,7 @@
 package chesterfield;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Minimum requred fields for document serialization and deserialization 
  */
@@ -17,5 +19,5 @@ public interface Document
      * @return rev
      */
     String getRev();
-    void setRev();
+    void setRev(String rev);
 }

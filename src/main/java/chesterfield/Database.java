@@ -1,13 +1,9 @@
 package chesterfield;
 
-import com.google.gson.JsonObject;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
+import com.google.gson.*;
 
 import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
-
-import org.mortbay.util.ajax.JSON;
 
 /**
  * Represents a Couchdb database which can be used to update documents
@@ -15,7 +11,8 @@ import org.mortbay.util.ajax.JSON;
 public class Database
 {
     private static final String DOC_COUNT = "doc_count";
-    private static final Gson GSON = new Gson();
+    private static final FieldNamingStrategy DEFAULT_FIELD_NAMING_STRATEGY = new CouchFieldNamingStrategy();
+    private final Gson gson;
 
     private final String name;
     private final Session session;
@@ -24,6 +21,9 @@ public class Database
     {
         this.name = name;
         this.session = session;
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setFieldNamingStrategy(DEFAULT_FIELD_NAMING_STRATEGY);
+        this.gson = gsonBuilder.create();
     }
 
     /**
@@ -63,23 +63,26 @@ public class Database
     }
 
     /**
-     * Save the specified document
+     * Save the specified document. If no id is specified the server will assign one.
+     * When the document has been successfully saved the id and rev fields will be automatically updated
      * @param document
      * @return success
      */
     public boolean save(Document document)
     {
-        return getClient().createRequest(getDbUrl() + document.getId()).executeWithBody(HttpMethod.PUT, GSON.toJson(document)).isOK();
+        final HttpMethod method = document.getId() == null ? HttpMethod.POST : HttpMethod.PUT;
+        final String url = document.getId() == null ? getDbUrl() : getDocumentUrl(document.getId());
+        final CouchResult<JsonObject> result = getClient().createRequest(url).executeWithBody(method, gson.toJson(document));
+
+        if (result.isOK())
+        {
+            document.setId(result.getElement().get("id").getAsString());
+            document.setRev(result.getElement().get("rev").getAsString());
+        }
+
+        return result.isOK();
     }
 
-    //Not sure how to make this work just yet...
-//    public boolean save(JsonObject jsonObject)
-//    {
-//        final JsonElement element = jsonObject.get("_id");
-//        if (element == null) return false;
-//
-//        return getClient().createRequest(getDocumentUrl(element.getAsString())).executeWithBody(HttpMethod.PUT, GSON.);
-//    }
 
     /**
      * Get the document with the given id
@@ -108,7 +111,7 @@ public class Database
     {
         final JsonElement element = getDocumentAsJsonElement(id);
         if (element == null) return null;
-        return GSON.fromJson(element, t);
+        return gson.fromJson(element, t);
     }
 
     /**
