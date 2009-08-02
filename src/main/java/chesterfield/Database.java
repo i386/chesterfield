@@ -7,12 +7,15 @@ import com.google.gson.JsonElement;
 import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
 
+import org.mortbay.util.ajax.JSON;
+
 /**
  * Represents a Couchdb database which can be used to update documents
  */
 public class Database
 {
     private static final String DOC_COUNT = "doc_count";
+    private static final Gson GSON = new Gson();
 
     private final String name;
     private final Session session;
@@ -60,6 +63,25 @@ public class Database
     }
 
     /**
+     * Save the specified document
+     * @param document
+     * @return success
+     */
+    public boolean save(Document document)
+    {
+        return getClient().createRequest(getDbUrl() + document.getId()).executeWithBody(HttpMethod.PUT, GSON.toJson(document)).isOK();
+    }
+
+    //Not sure how to make this work just yet...
+//    public boolean save(JsonObject jsonObject)
+//    {
+//        final JsonElement element = jsonObject.get("_id");
+//        if (element == null) return false;
+//
+//        return getClient().createRequest(getDocumentUrl(element.getAsString())).executeWithBody(HttpMethod.PUT, GSON.);
+//    }
+
+    /**
      * Get the document with the given id
      * @param id
      * @return element
@@ -72,7 +94,7 @@ public class Database
 
     private JsonElement getDocumentAsJsonElement(String id)
     {
-        final CouchResult<JsonElement> result = getClient().createRequest(getDbUrl() + urlEncode(id)).execute(HttpMethod.GET);
+        final CouchResult<JsonElement> result = getClient().createRequest(getDocumentUrl(id)).execute(HttpMethod.GET);
         return result.isOK() ? result.getElement() : null;
     }
 
@@ -86,8 +108,7 @@ public class Database
     {
         final JsonElement element = getDocumentAsJsonElement(id);
         if (element == null) return null;
-        Gson gson = new Gson();
-        return gson.fromJson(element, t);
+        return GSON.fromJson(element, t);
     }
 
     /**
@@ -97,7 +118,7 @@ public class Database
      */
     public boolean deleteDocumentById(String id)
     {
-        return getClient().createRequest(getDbUrl() + id).execute(HttpMethod.DELETE).isOK();
+        return getClient().createRequest(getDocumentUrl(id)).execute(HttpMethod.DELETE).isOK();
     }
 
     /**
@@ -135,5 +156,15 @@ public class Database
         {
             throw new RuntimeException(e.getMessage(), e);
         }
+    }
+
+    /**
+     * Get the document url
+     * @param id
+     * @return url
+     */
+    private String getDocumentUrl(String id)
+    {
+        return getDbUrl() + urlEncode(id);
     }
 }
