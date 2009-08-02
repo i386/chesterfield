@@ -15,7 +15,7 @@ import java.util.Iterator;
 /**
  * Implementation of {@link chesterfield.CouchClient} using the Jetty HTTP client
  */
-public class JettyCouchClient implements CouchClient
+class JettyCouchClient implements CouchClient
 {
     private final HttpClient httpClient = new HttpClient();
 
