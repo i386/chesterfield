@@ -6,7 +6,7 @@ import com.google.gson.JsonElement;
  * Represents a request that can be executed by a {@link chesterfield.CouchClient}
  * @param <T> JsonElement that is returned from the response body
  */
-public interface CouchRequest<T extends JsonElement>
+interface CouchRequest<T extends JsonElement>
 {
     /**
      * Executes the request

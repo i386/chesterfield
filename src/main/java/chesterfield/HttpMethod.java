@@ -3,7 +3,7 @@ package chesterfield;
 /**
  * HTTP Methods
  */
-public enum HttpMethod
+enum HttpMethod
 {
     GET,
     PUT,

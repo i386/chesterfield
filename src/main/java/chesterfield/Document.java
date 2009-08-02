@@ -3,7 +3,9 @@ package chesterfield;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Minimum requred fields for document serialization and deserialization 
+ * Minimum requred fields for document serialization and deserialization
+ *
+ * Implement this interface on your own classes so that they can be saved to couch
  */
 public interface Document
 {

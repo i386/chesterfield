@@ -9,7 +9,7 @@ import java.util.Map;
  * Result from {@link chesterfield.CouchRequest}
  * @param <T> JsonElement impl to map back to
  */
-public class CouchResult<T extends JsonElement>
+class CouchResult<T extends JsonElement>
 {
     private final int responseCode;
     private final T element;
