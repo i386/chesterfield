@@ -2,34 +2,15 @@
 <project relativePaths="false" version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/chesterfield/jetty/JettyCouchClient.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_1_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/chesterfield/Database.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/chesterfield/Session.java" afterPath="$PROJECT_DIR$/src/main/java/chesterfield/Session.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/chesterfield/CouchRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/sqlDataSources.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/projectCodeStyle.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/chesterfield/CouchResult.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/chesterfield/WireException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/chesterfield/SessionTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_3_8_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/templateLanguages.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/chesterfield/Database.java" afterPath="$PROJECT_DIR$/src/main/java/chesterfield/Database.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/chesterfield/HttpMethod.java" afterPath="$PROJECT_DIR$/src/main/java/chesterfield/HttpMethod.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/chesterfield/jetty/JettyCouchClient.java" afterPath="$PROJECT_DIR$/src/main/java/chesterfield/jetty/JettyCouchClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/chesterfield/CouchResult.java" afterPath="$PROJECT_DIR$/src/main/java/chesterfield/CouchResult.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/chesterfield/CouchClient.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dynamic.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/chesterfield/CouchRequest.java" afterPath="$PROJECT_DIR$/src/main/java/chesterfield/CouchRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="chesterfield.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,21 +29,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/src/test/java/chesterfield/ChesterfieldTestCase.java" line="24" class="chesterfield.ChesterfieldTestCase" package="chesterfield">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -112,10 +78,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChesterfieldTestCase.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ChesterfieldTestCase.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/chesterfield/ChesterfieldTestCase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="0" selection-start="574" selection-end="574" vertical-scroll-proportion="0.8496732">
+            <state line="24" column="0" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -124,7 +90,16 @@
       <file leaf-file-name="Database.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="10" selection-start="203" selection-end="203" vertical-scroll-proportion="0.0">
+            <state line="36" column="20" selection-start="698" selection-end="698" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="31" selection-start="1373" selection-end="1373" vertical-scroll-proportion="0.42196533">
               <folding />
             </state>
           </provider>
@@ -133,19 +108,10 @@
       <file leaf-file-name="Session.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/Session.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="28" selection-start="1634" selection-end="1634" vertical-scroll-proportion="0.0">
+            <state line="49" column="21" selection-start="1063" selection-end="1063" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CouchRequest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/CouchRequest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="0" selection-start="59" selection-end="59" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -153,7 +119,7 @@
       <file leaf-file-name="JettyCouchClient.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/jetty/JettyCouchClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="36" selection-start="1677" selection-end="1677" vertical-scroll-proportion="0.0">
+            <state line="35" column="51" selection-start="1156" selection-end="1156" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -161,19 +127,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WireException.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/WireException.java">
+      <file leaf-file-name="Callable.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar:///usr/lib/jvm/java-6-sun/jre/lib/rt.jar!/java/util/concurrent/Callable.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="19" selection-start="36" selection-end="49" vertical-scroll-proportion="0.0">
+            <state line="5" column="17" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Buffer.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/repository/org/mortbay/jetty/jetty/6.1.17/jetty-6.1.17.jar!/org/mortbay/io/Buffer.class">
+      <file leaf-file-name="CouchRequest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/CouchRequest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="23" selection-start="156" selection-end="162" vertical-scroll-proportion="0.0">
+            <state line="4" column="17" selection-start="77" selection-end="77" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HttpMethod.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/HttpMethod.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="12" selection-start="59" selection-end="59" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -182,19 +157,10 @@
       <file leaf-file-name="CouchResult.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/CouchResult.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="35" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0">
+            <state line="32" column="57" selection-start="706" selection-end="706" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="52" selection-start="982" selection-end="982" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -555,23 +521,23 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1680" height="1000" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39952996" sideWeight="0.5" order="3" side_tool="false" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39952996" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32902467" sideWeight="0.5" order="-1" side_tool="false" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32902467" sideWeight="0.5" order="-1" side_tool="false" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24969174" sideWeight="0.6627497" order="1" side_tool="false" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1541307" sideWeight="0.59224445" order="-1" side_tool="false" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24969174" sideWeight="0.59224445" order="0" side_tool="false" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1541307" sideWeight="0.6627497" order="-1" side_tool="false" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24969174" sideWeight="0.6627497" order="0" side_tool="false" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" />
@@ -610,20 +576,6 @@
     <find-history />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="52" selection-start="982" selection-end="982" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/repository/com/google/code/gson/gson/1.3/gson-1.3.jar!/com/google/gson/JsonParser.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -652,41 +604,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/CouchRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="59" selection-end="59" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/jetty/JettyCouchClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="36" selection-start="1677" selection-end="1677" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/WireException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="19" selection-start="36" selection-end="49" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/CouchResult.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="35" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="10" selection-start="203" selection-end="203" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -698,18 +618,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/Session.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/chesterfield/ChesterfieldTestCase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="28" selection-start="1634" selection-end="1634" vertical-scroll-proportion="0.0">
+        <state line="24" column="0" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-6-sun/jre/lib/rt.jar!/java/util/concurrent/Callable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="17" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/CouchRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="17" selection-start="77" selection-end="77" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/CouchResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="57" selection-start="706" selection-end="706" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/chesterfield/ChesterfieldTestCase.java">
+    <entry file="jar:///usr/lib/jvm/java-6-sun/jre/lib/rt.jar!/java/lang/Enum.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="574" selection-end="574" vertical-scroll-proportion="0.8496732">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/jetty/JettyCouchClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="51" selection-start="1156" selection-end="1156" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/HttpMethod.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="12" selection-start="59" selection-end="59" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/Session.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="21" selection-start="1063" selection-end="1063" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/chesterfield/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="20" selection-start="698" selection-end="698" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="31" selection-start="1373" selection-end="1373" vertical-scroll-proportion="0.42196533">
           <folding />
         </state>
       </provider>

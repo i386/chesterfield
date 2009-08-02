@@ -1,5 +1,8 @@
 package chesterfield;
 
+/**
+ * HTTP Methods
+ */
 public enum HttpMethod
 {
     GET,

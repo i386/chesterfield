@@ -1,9 +1,6 @@
 package chesterfield.jetty;
 
-import chesterfield.CouchClient;
-import chesterfield.CouchRequest;
-import chesterfield.CouchResult;
-import chesterfield.WireException;
+import chesterfield.*;
 import org.mortbay.jetty.client.HttpClient;
 import org.mortbay.jetty.client.HttpExchange;
 import org.mortbay.io.ByteArrayBuffer;
@@ -28,15 +25,15 @@ public class JettyCouchClient implements CouchClient
     {
         return new CouchRequest()
         {
-            public CouchResult execute(String method) throws WireException
+            public CouchResult execute(HttpMethod method) throws WireException
             {
                 return executeWithBody(method, null);
             }
 
-            public CouchResult executeWithBody(String method, String body) throws WireException
+            public CouchResult executeWithBody(HttpMethod method, String body) throws WireException
             {
                 HttpExchange.ContentExchange contentExchange = new HttpExchange.ContentExchange();
-                contentExchange.setMethod(method);
+                contentExchange.setMethod(method.name());
                 contentExchange.setURL(url);
                 
                 if (body != null)

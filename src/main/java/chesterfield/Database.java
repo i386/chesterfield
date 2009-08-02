@@ -31,4 +31,13 @@ public class Database
     {
         return session;
     }
+
+    /**
+     * Get the Database Url
+     * @return dbUrl
+     */
+    String getDbUrl()
+    {
+        return session.getBaseUrl() + name + "/";
+    }
 }

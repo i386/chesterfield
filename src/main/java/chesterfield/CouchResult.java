@@ -30,6 +30,6 @@ public class CouchResult<T extends JsonElement>
 
     public boolean isOK()
     {
-        return responseCode == 200;
+        return responseCode >= 200 && responseCode < 300;
     }
 }

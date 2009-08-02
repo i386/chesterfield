@@ -17,7 +17,7 @@ public class Session
     private final int port;
     private final boolean ssl;
 
-    private final CouchClient couchClient;
+    private final CouchClient client;
     private final String baseUrl;
 
     /**
@@ -35,7 +35,7 @@ public class Session
 
         try
         {
-            couchClient = new JettyCouchClient();
+            client = new JettyCouchClient();
         }
         catch (Exception e) //Wow, jetty, that sort of sucks
         {
@@ -46,12 +46,31 @@ public class Session
     }
 
     /**
+     * Get the {@link chesterfield.CouchClient}
+     * @return client
+     */
+    CouchClient getClient()
+    {
+        return client;
+    }
+
+    /**
+     * Get Base URL
+     * @return url
+     */
+    String getBaseUrl()
+    {
+        return baseUrl;
+    }
+
+    /**
      * Lists all the databases on the couchdb server for this session
      * @return databases
      */
     public List<Database> getDatabases() 
     {
-        final CouchResult<JsonArray> result = couchClient.createRequest(baseUrl + "_all_dbs").execute("GET");
+        final String listDatabasesUrl = baseUrl + "_all_dbs";
+        final CouchResult<JsonArray> result = client.createRequest(listDatabasesUrl).execute(HttpMethod.GET);
         if (result.isOK())
         {
             final ArrayList<Database> databases = new ArrayList<Database>(result.getElement().size());
@@ -68,8 +87,19 @@ public class Session
      * Lists all the database names on the couchdb server for this session
      * @return databaseNames
      */
-    public String[] getDatabaseNames()
+    public List<String> getDatabaseNames()
     {
+        final String listDatabasesUrl = baseUrl + "_all_dbs";
+        final CouchResult<JsonArray> result = client.createRequest(listDatabasesUrl).execute(HttpMethod.GET);
+        if (result.isOK())
+        {
+            final ArrayList<String> databases = new ArrayList<String>(result.getElement().size());
+            for (JsonElement element : result.getElement())
+            {
+                databases.add(element.getAsString());
+            }
+            return databases;
+        }
         return null;
     }
 
@@ -80,7 +110,10 @@ public class Session
      */
     public Database createDatabase(String databaseName)
     {
-        return null;
+        Database database = new Database(databaseName, this);
+        CouchResult result = client.createRequest(baseUrl + databaseName + "/").execute(HttpMethod.PUT);
+        if (!result.isOK()) return null;
+        return database;
     }
 
     /**
@@ -91,7 +124,12 @@ public class Session
      */
     public Database getDatabase(String databaseName, boolean createIfDoesNotExist)
     {
-        return null;
+        final boolean exists = getDatabaseNames().contains(databaseName);
+        if (!exists)
+        {
+            return createDatabase(databaseName);
+        }
+        return new Database(databaseName, this);
     }
 
     /**
@@ -111,7 +149,7 @@ public class Session
      */
     public boolean deleteDatabase(String databaseName)
     {
-        return false;
+        return client.createRequest(baseUrl + databaseName + "/").execute(HttpMethod.DELETE).isOK();
     }
 
     /**
