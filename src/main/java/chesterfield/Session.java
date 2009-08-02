@@ -18,6 +18,7 @@ public class Session
     private final boolean ssl;
 
     private final CouchClient couchClient;
+    private final String baseUrl;
 
     /**
      * Creates a new session
@@ -40,6 +41,8 @@ public class Session
         {
             throw new RuntimeException(e.getMessage(), e);
         }
+
+        baseUrl = (ssl ? "https" : "http") + "://" + host + ":" + port + "/";
     }
 
     /**
@@ -48,7 +51,7 @@ public class Session
      */
     public List<Database> getDatabases() 
     {
-        final CouchResult<JsonArray> result = couchClient.createRequest("http://localhost:5984/_all_dbs").execute("GET");
+        final CouchResult<JsonArray> result = couchClient.createRequest(baseUrl + "_all_dbs").execute("GET");
         if (result.isOK())
         {
             final ArrayList<Database> databases = new ArrayList<Database>(result.getElement().size());
