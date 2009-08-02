@@ -66,7 +66,8 @@ public class Database
      */
     public JsonObject getDocument(String id)
     {
-        return (JsonObject)getDocumentAsJsonElement(id);
+        final JsonElement element = getDocumentAsJsonElement(id);
+        return element == null ? null : element.getAsJsonObject();
     }
 
     private JsonElement getDocumentAsJsonElement(String id)
@@ -81,12 +82,32 @@ public class Database
      * @param <T> type of the object to map to
      * @return document
      */
-    public <T> T getDocument(String id, Class<T> t)
+    public <T extends Document> T getDocument(String id, Class<T> t)
     {
         final JsonElement element = getDocumentAsJsonElement(id);
         if (element == null) return null;
         Gson gson = new Gson();
         return gson.fromJson(element, t);
+    }
+
+    /**
+     * Deletes the document represented by the id
+     * @param id
+     * @return success
+     */
+    public boolean deleteDocumentById(String id)
+    {
+        return getClient().createRequest(getDbUrl() + id).execute(HttpMethod.DELETE).isOK();
+    }
+
+    /**
+     * Deletes the document
+     * @param document
+     * @return success
+     */
+    public boolean deleteDocument(Document document)
+    {
+        return deleteDocumentById(document.getId());
     }
 
     /**
