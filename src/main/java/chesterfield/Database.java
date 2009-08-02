@@ -120,6 +120,11 @@ public class Database
         return result.getElement().get(DOC_COUNT).getAsInt();
     }
 
+    /**
+     * URL Encode the passed string and wrap any exceptions in a {@link RuntimeException}
+     * @param s string to encode
+     * @return encodedString
+     */
     private String urlEncode(String s)
     {
         try
