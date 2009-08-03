@@ -41,27 +41,15 @@ public class Database
         return session;
     }
 
+    /**
+     * Returns a valid {@link chesterfield.DesignDocument} for the given {@link chesterfield.Document}
+     * Typically this is used in a natural query
+     * @param document
+     * @return documentOperations
+     */
     public DocumentOperations forDocument(Document document)
     {
         return new DocumentOperationsImpl(getClient(), this, document, gson);
-    }
-
-    /**
-     * Get the couch client
-     * @return client
-     */
-    CouchClient getClient()
-    {
-        return getSession().getClient();
-    }
-
-    /**
-     * Get the Database Url
-     * @return dbUrl
-     */
-    String getDbUrl()
-    {
-        return session.getBaseUrl() + URLUtils.urlEncode(name) + "/";
     }
 
     /**
@@ -88,6 +76,20 @@ public class Database
         return result.getElement().get(DOC_COUNT).getAsInt();
     }
 
+//    public DesignDocument getDesignDocuments()
+//    {
+//        ///dname/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22 304
+//
+//    }
+
+    /**
+     * Compact the database
+     */
+    public void compact()
+    {
+        getClient().createRequest(getDbUrl() + "/_compact").execute(HttpMethod.POST);
+    }
+
     /**
      * Get the document url
      *
@@ -97,5 +99,23 @@ public class Database
     private String getDocumentUrl(String id)
     {
         return getDbUrl() + URLUtils.urlEncode(id);
+    }
+    
+    /**
+     * Get the couch client
+     * @return client
+     */
+    CouchClient getClient()
+    {
+        return getSession().getClient();
+    }
+
+    /**
+     * Get the Database Url
+     * @return dbUrl
+     */
+    String getDbUrl()
+    {
+        return session.getBaseUrl() + URLUtils.urlEncode(name) + "/";
     }
 }
