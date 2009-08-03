@@ -20,7 +20,7 @@ class DocumentOperationsImpl implements DocumentOperations
 
     public boolean delete()
     {
-        final String url = getDocumentUrl(document.getId()) + "?rev=" + document.getRev();
+        final String url = getDocumentUrl() + "?rev=" + document.getRev();
         final CouchResult<JsonObject> result = couchClient.createRequest(url).execute(HttpMethod.DELETE);
         return result.getElement().get("ok") != null && result.isOK();
     }
@@ -28,7 +28,7 @@ class DocumentOperationsImpl implements DocumentOperations
     public boolean save()
     {
         final HttpMethod method = document.getId() == null ? HttpMethod.POST : HttpMethod.PUT;
-        final String url = document.getId() == null ? database.getDbUrl() : getDocumentUrl(document.getId());
+        final String url = document.getId() == null ? database.getDbUrl() : getDocumentUrl();
         final CouchResult<JsonObject> result = couchClient.createRequest(url).executeWithBody(method, gson.toJson(document));
 
         if (result.isOK())
@@ -42,7 +42,7 @@ class DocumentOperationsImpl implements DocumentOperations
 
     public boolean copy(String name)
     {
-        throw new UnsupportedOperationException();
+        return couchClient.createRequestWithHeader(getDocumentUrl(), "Destination", name).execute(HttpMethod.COPY).isOK();
     }
 
     /**
@@ -51,8 +51,8 @@ class DocumentOperationsImpl implements DocumentOperations
      * @param id
      * @return url
      */
-    private String getDocumentUrl(String id)
+    private String getDocumentUrl()
     {
-        return database.getDbUrl() + URLUtils.urlEncode(id);
+        return database.getDbUrl() + URLUtils.urlEncode(document.getId());
     }
 }

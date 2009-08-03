@@ -56,4 +56,19 @@ public class DatabaseTest extends ChesterfieldTestCase
         assertTrue(getDatabase().forDocument(document).delete());
         assertNull(getDatabase().get("123", MyDocument.class));
     }
+
+    public void testCopy() throws Exception
+    {
+        MyDocument document = new MyDocument();
+        document.setId("123");
+        document.setHelloWorld("copycat!");
+
+        getDatabase().forDocument(document).save();
+
+        getDatabase().forDocument(document).copy("987");
+
+        MyDocument copiedDocument = getDatabase().get("987", MyDocument.class);
+        assertNotNull(copiedDocument);
+        assertEquals(document.getHelloWorld(), copiedDocument.getHelloWorld());
+    }
 }

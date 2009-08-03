@@ -1,6 +1,5 @@
 package chesterfield;
 
-import chesterfield.*;
 import org.mortbay.jetty.client.HttpClient;
 import org.mortbay.jetty.client.HttpExchange;
 import org.mortbay.jetty.HttpFields;
@@ -25,70 +24,90 @@ class JettyCouchClient implements CouchClient
         httpClient.start();
     }
 
+    public CouchRequest createRequestWithHeader(String url, String headerKey, String headerValue)
+    {
+        return new JettyRequest(url, headerKey, headerValue);
+    }
+
     public CouchRequest createRequest(final String url)
     {
-        return new CouchRequest()
+        return new JettyRequest(url, null, null);
+    }
+
+    class JettyRequest implements CouchRequest
+    {
+        private final String url;
+        private final String headerKey;
+        private final String headerValue;
+
+        JettyRequest(String url, String headerKey, String headerValue)
         {
-            public CouchResult execute(HttpMethod method) throws WireException
+            this.url = url;
+            this.headerKey = headerKey;
+            this.headerValue = headerValue;
+        }
+
+        public CouchResult execute(HttpMethod method) throws WireException
+        {
+            return executeWithBody(method, null);
+        }
+
+        public CouchResult executeWithBody(HttpMethod method, String body) throws WireException
+        {
+            HttpExchange.ContentExchange contentExchange = new HttpExchange.ContentExchange();
+            contentExchange.setMethod(method.name());
+            contentExchange.setURL(url);
+            contentExchange.setRequestContentType("application/json");
+
+            if (headerKey != null && headerValue != null) contentExchange.setRequestHeader(headerKey, headerValue);
+
+            if (body != null)
             {
-                return executeWithBody(method, null);
+                contentExchange.setRequestContent(new ByteArrayBuffer(body));
             }
 
-            public CouchResult executeWithBody(HttpMethod method, String body) throws WireException
+            try
             {
-                HttpExchange.ContentExchange contentExchange = new HttpExchange.ContentExchange();
-                contentExchange.setMethod(method.name());
-                contentExchange.setURL(url);
-                contentExchange.setRequestContentType("application/json");
-                
-                if (body != null)
-                {
-                    contentExchange.setRequestContent(new ByteArrayBuffer(body));
-                }
-
-                try
-                {
-                    httpClient.send(contentExchange);
-                }
-                catch (IOException e)
-                {
-                    throw new WireException(e.getMessage(), e);
-                }
-                
-                try
-                {
-                    contentExchange.waitForDone();
-                }
-                catch (InterruptedException e)
-                {
-                    throw new RuntimeException(e.getMessage(), e);
-                }
-
-                try
-                {
-                    final Map<String, String> headers = getHeaders(contentExchange.getResponseFields());
-                    return new CouchResult(contentExchange.getResponseStatus(), contentExchange.getResponseContent(), headers);
-                }
-                catch (UnsupportedEncodingException e)
-                {
-                    throw new RuntimeException(e.getMessage(), e);
-                }
+                httpClient.send(contentExchange);
+            }
+            catch (IOException e)
+            {
+                throw new WireException(e.getMessage(), e);
             }
 
-            private Map<String, String> getHeaders(HttpFields httpFields)
+            try
             {
-                final Map<String, String> headers = new HashMap<String, String>();
-                if (httpFields != null)
-                {
-                    final Iterator<HttpFields.Field> iterator = httpFields.getFields();
-                    while (iterator.hasNext())
-                    {
-                        final HttpFields.Field field = iterator.next();
-                        headers.put(field.getName(), field.getValue());
-                    }
-                }
-                return headers;
+                contentExchange.waitForDone();
             }
-        };
+            catch (InterruptedException e)
+            {
+                throw new RuntimeException(e.getMessage(), e);
+            }
+
+            try
+            {
+                final Map<String, String> headers = getHeaders(contentExchange.getResponseFields());
+                return new CouchResult(contentExchange.getResponseStatus(), contentExchange.getResponseContent(), headers);
+            }
+            catch (UnsupportedEncodingException e)
+            {
+                throw new RuntimeException(e.getMessage(), e);
+            }
+        }
+
+        private Map<String, String> getHeaders(HttpFields httpFields)
+        {
+            final Map<String, String> headers = new HashMap<String, String>();
+            if (httpFields != null)
+            {
+                final Iterator<HttpFields.Field> iterator = httpFields.getFields();
+                while (iterator.hasNext())
+                {
+                    final HttpFields.Field field = iterator.next();
+                    headers.put(field.getName(), field.getValue());
+                }
+            }
+            return headers;
+        }
     }
 }
