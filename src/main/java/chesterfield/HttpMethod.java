@@ -9,5 +9,10 @@ enum HttpMethod
     PUT,
     POST,
     DELETE,
-    HEAD
+    HEAD,
+    
+    /**
+     * Non-standard HTTP method provided by couch for copying documents
+     */
+    COPY
 }

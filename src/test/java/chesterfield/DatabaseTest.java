@@ -14,8 +14,8 @@ public class DatabaseTest extends ChesterfieldTestCase
         document2.setHelloWorld("Hello, world!");
         document2.setId("456");
 
-        getDatabase().save(document);
-        getDatabase().save(document2);
+        getDatabase().forDocument(document).save();
+        getDatabase().forDocument(document2).save();
 
         assertEquals(2, getDatabase().getDocumentCount());
     }
@@ -26,17 +26,17 @@ public class DatabaseTest extends ChesterfieldTestCase
         document.setHelloWorld("Hello, world!");
         document.setId("123");
 
-        assertTrue(getDatabase().save(document));
+        getDatabase().forDocument(document).save();
 
-        MyDocument savedDocument = getDatabase().getDocument("123", MyDocument.class);
+        MyDocument savedDocument = getDatabase().get("123", MyDocument.class);
         assertNotNull(savedDocument);
 
         assertEquals(document.getId(), savedDocument.getId());
         assertEquals(document.getRev(), savedDocument.getRev());
         assertEquals("Hello, world!", savedDocument.getHelloWorld());
 
-        assertTrue(getDatabase().deleteDocument(savedDocument));
-        assertNull(getDatabase().getDocument("123", MyDocument.class));
+        getDatabase().forDocument(document).save();
+        assertNull(getDatabase().get("123", MyDocument.class));
     }
 
     public void testCreateSaveUpdateDeleteWithServerAssignedId() throws Exception
@@ -44,16 +44,16 @@ public class DatabaseTest extends ChesterfieldTestCase
         MyDocument document = new MyDocument();
         document.setHelloWorld("Hello, world!");
 
-        assertTrue(getDatabase().save(document));
+        getDatabase().forDocument(document).save();
 
-        MyDocument savedDocument = getDatabase().getDocument(document.getId(), MyDocument.class);
+        MyDocument savedDocument = getDatabase().get(document.getId(), MyDocument.class);
         assertNotNull(savedDocument);
 
         assertEquals(document.getId(), savedDocument.getId());
         assertEquals(document.getRev(), savedDocument.getRev());
         assertEquals("Hello, world!", savedDocument.getHelloWorld());
 
-        assertTrue(getDatabase().deleteDocument(savedDocument));
-        assertNull(getDatabase().getDocument("123", MyDocument.class));
+        assertTrue(getDatabase().forDocument(document).delete());
+        assertNull(getDatabase().get("123", MyDocument.class));
     }
 }

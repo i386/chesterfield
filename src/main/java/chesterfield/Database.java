@@ -2,9 +2,6 @@ package chesterfield;
 
 import com.google.gson.*;
 
-import java.net.URLEncoder;
-import java.io.UnsupportedEncodingException;
-
 /**
  * Represents a Couchdb database which can be used to update documents
  */
@@ -44,6 +41,11 @@ public class Database
         return session;
     }
 
+    public DocumentOperations forDocument(Document document)
+    {
+        return new DocumentOperationsImpl(getClient(), this, document, gson);
+    }
+
     /**
      * Get the couch client
      * @return client
@@ -59,69 +61,21 @@ public class Database
      */
     String getDbUrl()
     {
-        return session.getBaseUrl() + urlEncode(name) + "/";
-    }
-
-    /**
-     * Save the specified document. If no id is specified the server will assign one.
-     * When the document has been successfully saved the id and rev fields will be automatically updated
-     * @param document
-     * @return success
-     */
-    public boolean save(Document document)
-    {
-        final HttpMethod method = document.getId() == null ? HttpMethod.POST : HttpMethod.PUT;
-        final String url = document.getId() == null ? getDbUrl() : getDocumentUrl(document.getId());
-        final CouchResult<JsonObject> result = getClient().createRequest(url).executeWithBody(method, gson.toJson(document));
-
-        if (result.isOK())
-        {
-            document.setId(result.getElement().get("id").getAsString());
-            document.setRev(result.getElement().get("rev").getAsString());
-        }
-
-        return result.isOK();
-    }
-
-
-    /**
-     * Get the document with the given id
-     * @param id
-     * @return element
-     */
-    public JsonObject getDocument(String id)
-    {
-        final JsonElement element = getDocumentAsJsonElement(id);
-        return element == null ? null : element.getAsJsonObject();
-    }
-
-    private JsonElement getDocumentAsJsonElement(String id)
-    {
-        final CouchResult<JsonElement> result = getClient().createRequest(getDocumentUrl(id)).execute(HttpMethod.GET);
-        return result.isOK() ? result.getElement() : null;
+        return session.getBaseUrl() + URLUtils.urlEncode(name) + "/";
     }
 
     /**
      * Get Document with the given id
-     * @param id of the document
+     *
+     * @param id  of the document
      * @param <T> type of the object to map to
      * @return document
      */
-    public <T extends Document> T getDocument(String id, Class<T> t)
+    public <T extends Document> T get(String id, Class<T> t)
     {
-        final JsonElement element = getDocumentAsJsonElement(id);
-        if (element == null) return null;
-        return gson.fromJson(element, t);
-    }
-
-    /**
-     * Deletes the document
-     * @param document
-     * @return success
-     */
-    public boolean deleteDocument(Document document)
-    {
-        return getClient().createRequest(getDocumentUrl(document.getId() + "?rev=" + document.getRev())).execute(HttpMethod.DELETE).isOK();
+        final CouchResult<JsonElement> result = getClient().createRequest(getDocumentUrl(id)).execute(HttpMethod.GET);
+        if (!result.isOK() && result.getElement() == null) return null;
+        return gson.fromJson(result.getElement(), t);
     }
 
     /**
@@ -135,29 +89,14 @@ public class Database
     }
 
     /**
-     * URL Encode the passed string and wrap any exceptions in a {@link RuntimeException}
-     * @param s string to encode
-     * @return encodedString
-     */
-    private String urlEncode(String s)
-    {
-        try
-        {
-            return URLEncoder.encode(s, "UTF-8");
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            throw new RuntimeException(e.getMessage(), e);
-        }
-    }
-
-    /**
      * Get the document url
+     *
      * @param id
      * @return url
+     * @deprecated
      */
     private String getDocumentUrl(String id)
     {
-        return getDbUrl() + urlEncode(id);
+        return getDbUrl() + URLUtils.urlEncode(id);
     }
 }
