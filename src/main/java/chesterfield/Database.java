@@ -73,8 +73,8 @@ public class Database
      */
     public <T extends Document> T get(String id, Class<T> t)
     {
-        final CouchResult<JsonElement> result = getClient().createRequest(getDocumentUrl(id)).execute(HttpMethod.GET);
-        if (!result.isOK() && result.getElement() == null) return null;
+        final CouchResult<JsonObject> result = getClient().createRequest(getDocumentUrl(id)).execute(HttpMethod.GET);
+        if (!result.isOK()) return null;
         return gson.fromJson(result.getElement(), t);
     }
 
@@ -93,7 +93,6 @@ public class Database
      *
      * @param id
      * @return url
-     * @deprecated
      */
     private String getDocumentUrl(String id)
     {

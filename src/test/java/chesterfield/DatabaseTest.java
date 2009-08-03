@@ -35,7 +35,7 @@ public class DatabaseTest extends ChesterfieldTestCase
         assertEquals(document.getRev(), savedDocument.getRev());
         assertEquals("Hello, world!", savedDocument.getHelloWorld());
 
-        getDatabase().forDocument(document).save();
+        assertTrue(getDatabase().forDocument(document).delete());
         assertNull(getDatabase().get("123", MyDocument.class));
     }
 

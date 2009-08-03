@@ -21,7 +21,8 @@ class DocumentOperationsImpl implements DocumentOperations
     public boolean delete()
     {
         final String url = getDocumentUrl(document.getId()) + "?rev=" + document.getRev();
-        return couchClient.createRequest(url).execute(HttpMethod.DELETE).isOK();
+        final CouchResult<JsonObject> result = couchClient.createRequest(url).execute(HttpMethod.DELETE);
+        return result.getElement().get("ok") != null && result.isOK();
     }
 
     public boolean save()
