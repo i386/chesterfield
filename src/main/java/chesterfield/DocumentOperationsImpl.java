@@ -20,7 +20,6 @@ class DocumentOperationsImpl implements DocumentOperations
 
     public boolean delete()
     {
-        final HttpMethod method = document.getId() == null ? HttpMethod.POST : HttpMethod.PUT;
         final String url = getDocumentUrl(document.getId()) + "?rev=" + document.getRev();
         return couchClient.createRequest(url).execute(HttpMethod.DELETE).isOK();
     }
