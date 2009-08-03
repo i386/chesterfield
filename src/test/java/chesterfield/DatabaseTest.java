@@ -5,6 +5,19 @@ public class DatabaseTest extends ChesterfieldTestCase
     public void testGetDocumentCount() throws Exception
     {
         assertEquals(0, getDatabase().getDocumentCount());
+
+        MyDocument document = new MyDocument();
+        document.setHelloWorld("Hello, world!");
+        document.setId("123");
+
+        MyDocument document2 = new MyDocument();
+        document2.setHelloWorld("Hello, world!");
+        document2.setId("456");
+
+        getDatabase().save(document);
+        getDatabase().save(document2);
+
+        assertEquals(2, getDatabase().getDocumentCount());
     }
 
     public void testCreateSaveUpdateDelete() throws Exception
@@ -19,7 +32,7 @@ public class DatabaseTest extends ChesterfieldTestCase
         assertNotNull(savedDocument);
 
         assertEquals(document.getId(), savedDocument.getId());
-        assertEquals(savedDocument.getRev(), savedDocument.getRev());
+        assertEquals(document.getRev(), savedDocument.getRev());
         assertEquals("Hello, world!", savedDocument.getHelloWorld());
 
         assertTrue(getDatabase().deleteDocument(savedDocument));
@@ -37,7 +50,7 @@ public class DatabaseTest extends ChesterfieldTestCase
         assertNotNull(savedDocument);
 
         assertEquals(document.getId(), savedDocument.getId());
-        assertEquals(savedDocument.getRev(), savedDocument.getRev());
+        assertEquals(document.getRev(), savedDocument.getRev());
         assertEquals("Hello, world!", savedDocument.getHelloWorld());
 
         assertTrue(getDatabase().deleteDocument(savedDocument));

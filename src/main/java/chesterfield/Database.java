@@ -115,23 +115,13 @@ public class Database
     }
 
     /**
-     * Deletes the document represented by the id
-     * @param id
-     * @return success
-     */
-    public boolean deleteDocumentById(String id)
-    {
-        return getClient().createRequest(getDocumentUrl(id)).execute(HttpMethod.DELETE).isOK();
-    }
-
-    /**
      * Deletes the document
      * @param document
      * @return success
      */
     public boolean deleteDocument(Document document)
     {
-        return deleteDocumentById(document.getId());
+        return getClient().createRequest(getDocumentUrl(document.getId() + "?rev=" + document.getRev())).execute(HttpMethod.DELETE).isOK();
     }
 
     /**

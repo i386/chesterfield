@@ -49,8 +49,15 @@ public class SessionTest extends ChesterfieldTestCase
 
     public void testDbWithSlashInName() throws Exception
     {
-        Database database = getSession().createDatabase("chesterfield/testdb");
-        assertNotNull(database);
-        getSession().deleteDatabase(DATABASE_NAME);
+        getSession().deleteDatabase("chesterfield/testdb");
+        try
+        {
+            Database database = getSession().createDatabase("chesterfield/testdb");
+            assertNotNull(database);
+        }
+        finally
+        {
+            getSession().deleteDatabase("chesterfield/testdb");
+        }
     }
 }
