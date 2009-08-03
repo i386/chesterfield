@@ -2,6 +2,8 @@ package chesterfield;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -109,6 +111,14 @@ public class View
         if (!result.notModified() || result.isOK())
         {
             documents.clear();
+            
+            final JsonArray jsonArray = result.getElement().get("rows").getAsJsonArray();
+            final Iterator<JsonElement> iterator = jsonArray.iterator();
+            while (iterator.hasNext())
+            {
+                JsonObject jsonObject = (JsonObject)iterator.next();
+                documents.add(jsonObject);
+            }
         }
 
         return dataUpdated;
