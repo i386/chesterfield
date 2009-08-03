@@ -8,11 +8,11 @@ public class QueryBuilderTest extends ChesterfieldTestCase
         assertEquals("start", builder.getParameters().get("startKey"));
         assertEquals("end", builder.getParameters().get("endKey"));
         assertEquals(2, builder.getParameters().size());
-        assertEquals("startKey=start&endKey=end", builder.toString());
+        assertEquals("startKey=start&endKey=end", builder.build());
     }
 
     public void testBuildQueryStringWithEncodedChars() throws Exception
     {
-        assertEquals("key=i%5Clike%5Cslashes%5C", new QueryBuilder().key("i\\like\\slashes\\").toString());
+        assertEquals("key=i%5Clike%5Cslashes%5C", new QueryBuilder().key("i\\like\\slashes\\").build());
     }
 }

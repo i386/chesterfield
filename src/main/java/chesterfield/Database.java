@@ -76,11 +76,15 @@ public class Database
         return result.getElement().get(DOC_COUNT).getAsInt();
     }
 
-//    public DesignDocument getDesignDocuments()
-//    {
-//        ///dname/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22 304
-//
-//    }
+    public View view(String designDocument, String viewName)
+    {
+        return view(designDocument, viewName, null);
+    }
+
+    public View view(String designDocument, String viewName, QueryBuilder queryBuilder)
+    {
+        return new View(this, queryBuilder, gson, designDocument, viewName);
+    }
 
     /**
      * Compact the database

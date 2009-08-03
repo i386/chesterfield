@@ -47,12 +47,21 @@ class CouchResult<T extends JsonElement>
     }
 
     /**
-     * Sent back a 2xx response code
+     * If request was OK (2xx)
      * @return ok
      */
     public boolean isOK()
     {
         return responseCode >= 200 && responseCode < 300;
+    }
+
+    /**
+     * If data was not modified (HTTP 304)
+     * @return notModified
+     */
+    public boolean notModified()
+    {
+        return responseCode == 304;
     }
 
     /**

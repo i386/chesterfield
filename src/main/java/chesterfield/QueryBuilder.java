@@ -90,6 +90,11 @@ public class QueryBuilder
         return remove("reduce");
     }
 
+    String build()
+    {
+        return URLUtils.formUrlEncode(params);
+    }
+
     private QueryBuilder remove(String key)
     {
         params.remove(key);
@@ -105,6 +110,6 @@ public class QueryBuilder
     @Override
     public String toString()
     {
-        return URLUtils.formUrlEncode(params);
+        return build();
     }
 }
