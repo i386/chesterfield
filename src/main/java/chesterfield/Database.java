@@ -8,7 +8,6 @@ import com.google.gson.*;
 public class Database
 {
     private static final String DOC_COUNT = "doc_count";
-    private static final FieldNamingStrategy DEFAULT_FIELD_NAMING_STRATEGY = new CouchFieldNamingStrategy();
     private final Gson gson;
 
     private final String name;
@@ -18,9 +17,7 @@ public class Database
     {
         this.name = name;
         this.session = session;
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.setFieldNamingStrategy(DEFAULT_FIELD_NAMING_STRATEGY);
-        this.gson = gsonBuilder.create();
+        this.gson = new Gson();
     }
 
     /**
@@ -63,7 +60,7 @@ public class Database
     {
         final CouchResult<JsonObject> result = getClient().createRequest(getDocumentUrl(id)).execute(HttpMethod.GET);
         if (!result.isOK()) return null;
-        return gson.fromJson(result.getElement(), t);
+        return gson.fromJson(DocumentUtils.changeIdAndRevFieldNamesForMapping(result.getElement()), t);
     }
 
     /**

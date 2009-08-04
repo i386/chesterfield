@@ -70,7 +70,7 @@ public class View
 
                     public T next()
                     {             
-                        final JsonObject element = elementIterator.next();
+                        final JsonObject element = DocumentUtils.changeIdAndRevFieldNamesForMapping(elementIterator.next());
                         return gson.fromJson(element, type);
                     }
 

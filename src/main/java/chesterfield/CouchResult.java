@@ -1,7 +1,7 @@
 package chesterfield;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonElement;
 
 import java.util.Map;
 
