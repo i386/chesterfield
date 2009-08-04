@@ -5,7 +5,25 @@ import com.google.gson.JsonElement;
 
 class DocumentUtils
 {
-    static JsonObject changeIdAndRevFieldNamesForMapping(JsonObject jsonObject)
+    static JsonObject changeIdAndRevFieldNamesForSerialization(JsonObject jsonObject)
+    {
+        JsonElement rev = jsonObject.get("rev");
+        JsonElement id = jsonObject.get("id");
+        if (rev != null)
+        {
+            jsonObject.remove("rev");
+            jsonObject.add("_rev", rev);
+        }
+
+        if (id != null)
+        {
+            jsonObject.remove("id");
+            jsonObject.add("_id", id);
+        }
+        return jsonObject;
+    }
+
+    static JsonObject changeIdAndRevFieldNamesForDeserialization(JsonObject jsonObject)
     {
         JsonElement rev = jsonObject.get("_rev");
         JsonElement id = jsonObject.get("_id");

@@ -16,16 +16,14 @@ public class View
 
     private final Database database;
     private final String url;
-    private final List<JsonObject> documents;
-    private final Gson gson;
+    private final List<ViewResult> documents;
     private String lastKnownEtag = null;
 
-    View(final Database database, final QueryBuilder queryBuilder, final Gson gson, String designDocumentName, String viewName)
+    View(final Database database, final QueryBuilder queryBuilder, String designDocumentName, String viewName)
     {
         this.database = database;
-        this.documents = new LinkedList<JsonObject>();
-        this.gson = gson;
-
+        this.documents = new LinkedList<ViewResult>();
+        
         StringBuilder sb = new StringBuilder();
         sb.append(database.getDbUrl());
         sb.append("_design/");
@@ -49,38 +47,9 @@ public class View
         return documents.size();
     }
 
-    public Iterable<JsonObject> getDocuments()
+    public Iterable<ViewResult> getDocuments()
     {
-        return new LinkedList<JsonObject>(documents);
-    }
-
-    public <T extends Document> Iterable<T> getDocumentsAs(final Class<T> type)
-    {
-        final Iterator<JsonObject> elementIterator = getDocuments().iterator();
-        return new Iterable()
-        {
-            public Iterator iterator()
-            {
-                return new Iterator<T>()
-                {
-                    public boolean hasNext()
-                    {
-                        return elementIterator.hasNext();
-                    }
-
-                    public T next()
-                    {             
-                        final JsonObject element = DocumentUtils.changeIdAndRevFieldNamesForMapping(elementIterator.next());
-                        return gson.fromJson(element, type);
-                    }
-
-                    public void remove()
-                    {
-                        elementIterator.remove();
-                    }
-                };
-            }
-        };
+        return new LinkedList<ViewResult>(documents);
     }
 
     /**
@@ -117,7 +86,7 @@ public class View
             while (iterator.hasNext())
             {
                 JsonObject jsonObject = (JsonObject)iterator.next();
-                documents.add(jsonObject);
+                documents.add(new ViewResult(jsonObject.get("key").getAsString(), jsonObject.get("value").getAsJsonObject()));
             }
         }
 

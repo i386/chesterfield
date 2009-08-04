@@ -60,7 +60,7 @@ public class Database
     {
         final CouchResult<JsonObject> result = getClient().createRequest(getDocumentUrl(id)).execute(HttpMethod.GET);
         if (!result.isOK()) return null;
-        return gson.fromJson(DocumentUtils.changeIdAndRevFieldNamesForMapping(result.getElement()), t);
+        return gson.fromJson(DocumentUtils.changeIdAndRevFieldNamesForDeserialization(result.getElement()), t);
     }
 
     /**
@@ -80,7 +80,7 @@ public class Database
 
     public View view(String designDocument, String viewName, QueryBuilder queryBuilder)
     {
-        return new View(this, queryBuilder, gson, designDocument, viewName);
+        return new View(this, queryBuilder, designDocument, viewName);
     }
 
     /**

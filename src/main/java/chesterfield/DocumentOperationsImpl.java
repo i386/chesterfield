@@ -1,7 +1,6 @@
 package chesterfield;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 
 class DocumentOperationsImpl implements DocumentOperations
 {
@@ -29,6 +28,7 @@ class DocumentOperationsImpl implements DocumentOperations
     {
         final HttpMethod method = document.getId() == null ? HttpMethod.POST : HttpMethod.PUT;
         final String url = document.getId() == null ? database.getDbUrl() : getDocumentUrl();
+        
         final CouchResult<JsonObject> result = couchClient.createRequest(url).executeWithBody(method, gson.toJson(document));
 
         if (result.isOK())
@@ -47,8 +47,6 @@ class DocumentOperationsImpl implements DocumentOperations
 
     /**
      * Get the document url
-     *
-     * @param id
      * @return url
      */
     private String getDocumentUrl()
