@@ -28,7 +28,7 @@ public class View
 
         StringBuilder sb = new StringBuilder();
         sb.append(database.getDbUrl());
-        sb.append("/_design/");
+        sb.append("_design/");
         sb.append(URLUtils.urlEncode(designDocumentName));
         sb.append("/_view/");
         sb.append(URLUtils.urlEncode(viewName));
@@ -69,7 +69,7 @@ public class View
                     }
 
                     public T next()
-                    {
+                    {             
                         final JsonObject element = elementIterator.next();
                         return gson.fromJson(element, type);
                     }

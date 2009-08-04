@@ -37,6 +37,19 @@
                     <target>1.5</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>source</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -52,4 +65,17 @@
             </releases>
         </repository>
     </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>pyrmontlabs-release</id>
+            <name>Pyrmont Labs Release</name>
+            <url>http://localhost:8081/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>pyrmontlabs-snapshots</id>
+            <name>Pyrmont Labs Snapshots</name>
+            <url>http://localhost:8081/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

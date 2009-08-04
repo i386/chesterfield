@@ -22,7 +22,16 @@ public class Session
 
     /**
      * Creates a new session
-     * 
+     * @param host
+     * @param port
+     */
+    public Session(String host, int port)
+    {
+        this(host, port, false);
+    }
+
+    /**
+     * Creates a new session
      * @param host
      * @param port
      * @param ssl
