@@ -101,4 +101,13 @@ public class View
         documents.clear();
         lastKnownEtag = null;
     }
+
+    /**
+     * Get the URL to the view
+     * @return url
+     */
+    public String getUrl()
+    {
+        return url;
+    }
 }
