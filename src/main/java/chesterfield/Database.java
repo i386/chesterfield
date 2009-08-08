@@ -13,11 +13,11 @@ public class Database
     private final String name;
     private final Session session;
 
-    public Database(String name, Session session)
+    public Database(String name, Session session, Gson gson)
     {
         this.name = name;
         this.session = session;
-        this.gson = new Gson();
+        this.gson = gson;
     }
 
     /**

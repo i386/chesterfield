@@ -1,6 +1,5 @@
 package chesterfield;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -54,9 +53,9 @@ public class View
 
     /**
      * Updates the Documents inside of the View
-     * @return updated
+     * @return rows updated. Value is -1 if the view did not update
      */
-    public boolean update()
+    public int update()
     {
         final CouchRequest request;
         final CouchResult<JsonObject> result;
@@ -72,9 +71,6 @@ public class View
         }
 
         result = request.execute(HttpMethod.GET);
-
-        final boolean dataUpdated = (lastKnownEtag == null) ? result.isOK() : !result.notModified();
-
         lastKnownEtag = result.getHeaders().get(ETAG);
 
         if (!result.notModified() || result.isOK())
@@ -88,9 +84,9 @@ public class View
                 JsonObject jsonObject = (JsonObject)iterator.next();
                 documents.add(new ViewResult(jsonObject.get("key").getAsString(), jsonObject.get("value").getAsJsonObject()));
             }
+            return result.getElement().get("total_rows").getAsInt();
         }
-
-        return dataUpdated;
+        return -1;
     }
 
     /**

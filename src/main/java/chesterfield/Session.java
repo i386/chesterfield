@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.GsonBuilder;
+import com.google.gson.Gson;
 
 /**
  * Used to get a connection to a Couchdb database
@@ -19,6 +21,7 @@ public class Session
 
     private final CouchClient client;
     private final String baseUrl;
+    private GsonBuilder gsonBuilder;
 
     /**
      * Creates a new session
@@ -85,7 +88,7 @@ public class Session
             final ArrayList<Database> databases = new ArrayList<Database>(result.getElement().size());
             for (JsonElement element : result.getElement())
             {
-                databases.add(new Database(element.getAsString(), this));
+                databases.add(new Database(element.getAsString(), this, getGson()));
             }
             return databases;
         }
@@ -119,7 +122,7 @@ public class Session
      */
     public Database createDatabase(String databaseName)
     {
-        Database database = new Database(databaseName, this);
+        Database database = new Database(databaseName, this, getGson());
         CouchResult result = client.createRequest(database.getDbUrl()).execute(HttpMethod.PUT);
         if (!result.isOK()) return null;
         return database;
@@ -140,7 +143,7 @@ public class Session
         }
         else if (exists)
         {
-            return new Database(databaseName, this);
+            return new Database(databaseName, this, getGson());
         }
         return null;
     }
@@ -162,7 +165,7 @@ public class Session
      */
     public boolean deleteDatabase(String databaseName)
     {
-        final Database database = new Database(databaseName, this);
+        final Database database = new Database(databaseName, this, getGson());
         return client.createRequest(database.getDbUrl()).execute(HttpMethod.DELETE).isOK();
     }
 
@@ -175,5 +178,28 @@ public class Session
     {
         if (database == null) return false;
         return deleteDatabase(database.getName());
+    }
+
+    /**
+     * Get the Gson builder used for serialization and deserialization
+     * @return builder
+     */
+    public GsonBuilder getGsonBuilder()
+    {
+        return gsonBuilder;
+    }
+
+    /**
+     * Set the Gson builder used for serialization and deserialization
+     * @param gsonBuilder
+     */
+    public void setGsonBuilder(GsonBuilder gsonBuilder)
+    {
+        this.gsonBuilder = gsonBuilder;
+    }
+
+    private Gson getGson()
+    {
+        return gsonBuilder == null ? new Gson() : gsonBuilder.create();
     }
 }
