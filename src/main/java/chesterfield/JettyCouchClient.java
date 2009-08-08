@@ -1,9 +1,8 @@
 package chesterfield;
 
 import org.mortbay.jetty.client.HttpClient;
-import org.mortbay.jetty.client.HttpExchange;
+import org.mortbay.jetty.client.ContentExchange;
 import org.mortbay.jetty.HttpFields;
-import org.mortbay.io.ByteArrayBuffer;
 import org.mortbay.io.nio.IndirectNIOBuffer;
 
 import java.io.IOException;
@@ -12,13 +11,13 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
 
 /**
  * Implementation of {@link chesterfield.CouchClient} using the Jetty HTTP client
  */
 class JettyCouchClient implements CouchClient
 {
+    private static final String APPLICATION_JSON = "application/json";
     private final HttpClient httpClient = new HttpClient();
 
     public JettyCouchClient() throws Exception
@@ -57,10 +56,10 @@ class JettyCouchClient implements CouchClient
 
         public CouchResult executeWithBody(HttpMethod method, ByteBuffer body) throws WireException
         {
-            HttpExchange.ContentExchange contentExchange = new HttpExchange.ContentExchange();
+            final ContentExchange contentExchange = new ContentExchange(true);
             contentExchange.setMethod(method.name());
             contentExchange.setURL(url);
-            contentExchange.setRequestContentType("application/json");
+            contentExchange.setRequestContentType(APPLICATION_JSON);
 
             if (headerKey != null && headerValue != null) contentExchange.setRequestHeader(headerKey, headerValue);
 
