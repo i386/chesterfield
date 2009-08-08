@@ -2,6 +2,8 @@ package chesterfield;
 
 import com.google.gson.*;
 
+import java.nio.charset.Charset;
+
 class DocumentOperationsImpl implements DocumentOperations
 {
     final CouchClient couchClient;
@@ -28,8 +30,13 @@ class DocumentOperationsImpl implements DocumentOperations
     {
         final HttpMethod method = document.getId() == null ? HttpMethod.POST : HttpMethod.PUT;
         final String url = document.getId() == null ? database.getDbUrl() : getDocumentUrl();
+
+        final JsonObject element = (JsonObject)gson.toJsonTree(document);
+        DocumentUtils.changeIdAndRevFieldNamesForSerialization(element);
+        String body = gson.toJson(element);
         
-        final CouchResult<JsonObject> result = couchClient.createRequest(url).executeWithBody(method, gson.toJson(document));
+
+        final CouchResult<JsonObject> result = couchClient.createRequest(url).executeWithBody(method, body);
 
         if (result.isOK())
         {
