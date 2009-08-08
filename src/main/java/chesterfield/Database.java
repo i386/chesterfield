@@ -39,8 +39,7 @@ public class Database
     }
 
     /**
-     * Returns a valid {@link chesterfield.DesignDocument} for the given {@link chesterfield.Document}
-     * Typically this is used in a natural query
+     * Typically this is used in a natural query eg {@code database.forDocument(doc).save()}
      * @param document
      * @return documentOperations
      */
