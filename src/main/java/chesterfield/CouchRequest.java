@@ -2,6 +2,8 @@ package chesterfield;
 
 import com.google.gson.JsonElement;
 
+import java.nio.ByteBuffer;
+
 /**
  * Represents a request that can be executed by a {@link chesterfield.CouchClient}
  * @param <T> JsonElement that is returned from the response body
@@ -23,5 +25,5 @@ interface CouchRequest<T extends JsonElement>
      * @return result
      * @throws WireException
      */
-    CouchResult<T> executeWithBody(HttpMethod method, String body) throws WireException;
+    CouchResult<T> executeWithBody(HttpMethod method, ByteBuffer body) throws WireException;
 }

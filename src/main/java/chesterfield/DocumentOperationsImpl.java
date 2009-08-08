@@ -3,13 +3,16 @@ package chesterfield;
 import com.google.gson.*;
 
 import java.nio.charset.Charset;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 
 class DocumentOperationsImpl implements DocumentOperations
 {
-    final CouchClient couchClient;
-    final Database database;
-    final Document document;
-    final Gson gson;
+    private static final Charset CHARSET = Charset.forName("UTF-8");
+    private final CouchClient couchClient;
+    private final Database database;
+    private final Document document;
+    private final Gson gson;
 
     DocumentOperationsImpl(CouchClient couchClient, Database database, Document document, Gson gson)
     {
@@ -33,10 +36,9 @@ class DocumentOperationsImpl implements DocumentOperations
 
         final JsonObject element = (JsonObject)gson.toJsonTree(document);
         DocumentUtils.changeIdAndRevFieldNamesForSerialization(element);
-        String body = gson.toJson(element);
-        
-
-        final CouchResult<JsonObject> result = couchClient.createRequest(url).executeWithBody(method, body);
+        final String body = gson.toJson(element);
+        final ByteBuffer byteBuffer = CHARSET.encode(CharBuffer.wrap(body));
+        final CouchResult<JsonObject> result = couchClient.createRequest(url).executeWithBody(method, byteBuffer);
 
         if (result.isOK())
         {

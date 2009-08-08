@@ -4,12 +4,15 @@ import org.mortbay.jetty.client.HttpClient;
 import org.mortbay.jetty.client.HttpExchange;
 import org.mortbay.jetty.HttpFields;
 import org.mortbay.io.ByteArrayBuffer;
+import org.mortbay.io.nio.IndirectNIOBuffer;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 
 /**
  * Implementation of {@link chesterfield.CouchClient} using the Jetty HTTP client
@@ -52,7 +55,7 @@ class JettyCouchClient implements CouchClient
             return executeWithBody(method, null);
         }
 
-        public CouchResult executeWithBody(HttpMethod method, String body) throws WireException
+        public CouchResult executeWithBody(HttpMethod method, ByteBuffer body) throws WireException
         {
             HttpExchange.ContentExchange contentExchange = new HttpExchange.ContentExchange();
             contentExchange.setMethod(method.name());
@@ -63,7 +66,7 @@ class JettyCouchClient implements CouchClient
 
             if (body != null)
             {
-                contentExchange.setRequestContent(new ByteArrayBuffer(body));
+                contentExchange.setRequestContent(new IndirectNIOBuffer(body, true));
             }
 
             try
