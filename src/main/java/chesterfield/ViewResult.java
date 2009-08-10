@@ -7,11 +7,13 @@ public class ViewResult
 {
     private final String key;
     private final JsonObject value;
+    private final Gson gson;
 
-    ViewResult(String key, JsonObject value)
+    ViewResult(String key, JsonObject value, Gson gson)
     {
         this.key = key;
-        this.value = value;
+        this.value = DocumentUtils.changeIdAndRevFieldNamesForDeserialization(value);
+        this.gson = gson;
     }
 
     /**
@@ -31,7 +33,7 @@ public class ViewResult
      */
     public <T> T getValue(Class<T> type)
     {
-        final Gson gson = new Gson();
+        if (value == null) return null;
         return gson.fromJson(value, type);
     }
 }

@@ -3,6 +3,7 @@ package chesterfield;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -16,12 +17,14 @@ public class View
     private final Database database;
     private final String url;
     private final List<ViewResult> documents;
+    private final Gson gson;
     private String lastKnownEtag = null;
 
-    View(final Database database, final QueryBuilder queryBuilder, String designDocumentName, String viewName)
+    View(final Database database, final QueryBuilder queryBuilder, String designDocumentName, String viewName, Gson gson)
     {
         this.database = database;
         this.documents = new LinkedList<ViewResult>();
+        this.gson = gson;
         
         StringBuilder sb = new StringBuilder();
         sb.append(database.getDbUrl());
@@ -82,7 +85,22 @@ public class View
             while (iterator.hasNext())
             {
                 JsonObject jsonObject = (JsonObject)iterator.next();
-                documents.add(new ViewResult(jsonObject.get("key").getAsString(), jsonObject.get("value").getAsJsonObject()));
+                JsonElement keyElement = jsonObject.get("key");
+                JsonElement valueElement = jsonObject.get("value");
+
+                String key = null;
+                if (!keyElement.isJsonNull())
+                {
+                    key = keyElement.getAsString();
+                }
+
+                JsonObject valueObj = null;
+                if (!valueElement.isJsonNull() && valueElement.isJsonObject())
+                {
+                    valueObj = valueElement.getAsJsonObject();
+                }
+
+                documents.add(new ViewResult(key, valueObj, gson));
             }
             return result.getElement().get("total_rows").getAsInt();
         }

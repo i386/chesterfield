@@ -79,7 +79,7 @@ public class Database
 
     public View view(String designDocument, String viewName, QueryBuilder queryBuilder)
     {
-        return new View(this, queryBuilder, designDocument, viewName);
+        return new View(this, queryBuilder, designDocument, viewName, gson);
     }
 
     /**
