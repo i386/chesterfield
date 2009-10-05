@@ -88,7 +88,7 @@ public class Session
             final ArrayList<Database> databases = new ArrayList<Database>(result.getElement().size());
             for (JsonElement element : result.getElement())
             {
-                databases.add(new Database(element.getAsString(), this, getGson()));
+                databases.add(new Database(element.getAsString(), this));
             }
             return databases;
         }
@@ -122,7 +122,7 @@ public class Session
      */
     public Database createDatabase(String databaseName)
     {
-        Database database = new Database(databaseName, this, getGson());
+        Database database = new Database(databaseName, this);
         CouchResult result = client.createRequest(database.getDbUrl()).execute(HttpMethod.PUT);
         if (!result.isOK()) return null;
         return database;
@@ -143,7 +143,7 @@ public class Session
         }
         else if (exists)
         {
-            return new Database(databaseName, this, getGson());
+            return new Database(databaseName, this);
         }
         return null;
     }
@@ -165,7 +165,7 @@ public class Session
      */
     public boolean deleteDatabase(String databaseName)
     {
-        final Database database = new Database(databaseName, this, getGson());
+        final Database database = new Database(databaseName, this);
         return client.createRequest(database.getDbUrl()).execute(HttpMethod.DELETE).isOK();
     }
 
@@ -198,7 +198,7 @@ public class Session
         this.gsonBuilder = gsonBuilder;
     }
 
-    private Gson getGson()
+    Gson getGson()
     {
         return gsonBuilder == null ? new Gson() : gsonBuilder.create();
     }

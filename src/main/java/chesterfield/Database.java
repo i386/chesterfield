@@ -2,6 +2,8 @@ package chesterfield;
 
 import com.google.gson.*;
 
+import java.util.Collection;
+
 /**
  * Represents a Couchdb database which can be used to update documents
  */
@@ -13,11 +15,11 @@ public class Database
     private final String name;
     private final Session session;
 
-    public Database(String name, Session session, Gson gson)
+    public Database(String name, Session session)
     {
         this.name = name;
         this.session = session;
-        this.gson = gson;
+        this.gson = session.getGson();
     }
 
     /**
