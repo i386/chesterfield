@@ -6,6 +6,7 @@ public class MyDocument implements Document
     private String id;
     private String rev;
     private String helloWorld;
+    private MyBean myBean = new MyBean();
 
     public MyDocument()
     {
@@ -39,5 +40,15 @@ public class MyDocument implements Document
     public void setHelloWorld(final String helloWorld)
     {
         this.helloWorld = helloWorld;
+    }
+
+    public MyBean getMyBean()
+    {
+        return myBean;
+    }
+
+    public void setMyBean(MyBean myBean)
+    {
+        this.myBean = myBean;
     }
 }

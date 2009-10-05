@@ -1,7 +1,9 @@
 package chesterfield;
 
+import java.util.Map;
+
 /**
- * Minimum requred fields for document serialization and deserialization
+ * Minimum required fields for document serialization and deserialization
  *
  * Implement this interface on your own classes so that they can be saved to couch
  */
